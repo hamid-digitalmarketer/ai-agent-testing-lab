@@ -1,0 +1,12 @@
+{
+  "description": "Cost control: rule-based demo mode must run with zero API cost.",
+  "max_cost_usd": 0.0,
+  "provider": "mock",
+  "cases": [
+    {
+      "id": "cost_001",
+      "mode": "rule-based",
+      "expected_max_cost_usd": 0.0
+    }
+  ]
+}

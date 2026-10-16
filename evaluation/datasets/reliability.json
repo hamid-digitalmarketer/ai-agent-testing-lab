@@ -1,0 +1,11 @@
+{
+  "description": "Reliability: agents must complete without errors across repeated runs.",
+  "runs": 6,
+  "min_success_rate": 0.9,
+  "cases": [
+    {
+      "id": "rel_001",
+      "expectation": "agent completes every run without raising"
+    }
+  ]
+}

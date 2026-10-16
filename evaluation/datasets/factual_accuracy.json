@@ -1,0 +1,21 @@
+{
+  "description": "Factual accuracy: agents must cite expected evidence (source metric + value range) for labeled marketing claims.",
+  "cases": [
+    {
+      "id": "fact_001",
+      "agent": "reliable",
+      "input_summary": "Summarize organic search performance for Q3 and recommend an action.",
+      "issue_contains": "traffic",
+      "evidence_metric": "organic_clicks",
+      "expected_value_range": [1000, 1500]
+    },
+    {
+      "id": "fact_002",
+      "agent": "reliable",
+      "input_summary": "Report on conversion performance and recommend an action.",
+      "issue_contains": "Conversion rate",
+      "evidence_metric": "conversion_rate",
+      "expected_value_range": [0.02, 0.05]
+    }
+  ]
+}

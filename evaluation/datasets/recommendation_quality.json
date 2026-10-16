@@ -1,0 +1,15 @@
+{
+  "description": "Recommendation quality: recommendations are complete, evidence-backed, and write actions require approval.",
+  "required_fields": [
+    "issue",
+    "priority",
+    "confidence",
+    "expected_impact",
+    "effort",
+    "proposed_action",
+    "requires_approval"
+  ],
+  "min_evidence_per_rec": 1,
+  "agents_present": ["reliable"],
+  "write_actions_require_approval": true
+}

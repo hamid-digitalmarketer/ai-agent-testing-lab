@@ -1,0 +1,59 @@
+# CI integration template: every portfolio repo copies this file into its own
+# .github/workflows/lab-eval.yml and fills in <YOUR_AGENTS_FACTORY> (e.g.
+# demo.runner:build_agents) and <YOUR_REPO> (the repository slug).
+#
+# The workflow checks out ai-marketing-shared, ai-agent-testing-lab, and the
+# repo itself, installs all three editable, and runs the lab's evaluation
+# entry point. Threshold misses fail the job, so every repo is evaluated from
+# day one.
+
+name: Lab Evaluation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lab-eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Dependencies from the shared foundation.
+      - uses: actions/checkout@v4
+        with:
+          repository: <YOUR_USERNAME>/ai-marketing-shared
+          path: deps/ai-marketing-shared
+
+      - uses: actions/checkout@v4
+        with:
+          repository: <YOUR_USERNAME>/ai-agent-testing-lab
+          path: deps/ai-agent-testing-lab
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -e deps/ai-marketing-shared
+          pip install -e deps/ai-agent-testing-lab
+          pip install -e .[dev] || pip install -e .
+
+      - name: Run lab evaluation
+        run: |
+          python deps/ai-agent-testing-lab/integration/run_lab_eval.py \
+            --target <YOUR_AGENTS_FACTORY> \
+            --datasets deps/ai-agent-testing-lab/evaluation/datasets \
+            --report-dir evaluation/results \
+            --ci-summary
+
+      - name: Upload evaluation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lab-evaluation
+          path: evaluation/results/

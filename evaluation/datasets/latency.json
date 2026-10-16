@@ -1,0 +1,11 @@
+{
+  "description": "Latency budget: the full evaluation run must stay within the latency budget.",
+  "max_latency_ms": 5000,
+  "cases": [
+    {
+      "id": "lat_001",
+      "stage": "full_pipeline",
+      "expected_max_latency_ms": 5000
+    }
+  ]
+}

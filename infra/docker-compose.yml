@@ -1,0 +1,6 @@
+services:
+  lab-eval:
+    build: .
+    command: python -m evaluation.run
+    volumes:
+      - ./evaluation/results:/app/evaluation/results
