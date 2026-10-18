@@ -2,6 +2,9 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
+RUN pip install --no-cache-dir git+https://github.com/hamid-digitalmarketer/ai-marketing-shared.git
+
 # Install dependencies first for better layer caching.
 COPY pyproject.toml ./
 COPY lab ./lab
